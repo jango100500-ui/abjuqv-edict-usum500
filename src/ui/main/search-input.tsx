@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Lottie from 'lottie-react'
 import { triggerHaptic } from '../../lib/tg'
@@ -25,7 +25,6 @@ export const SearchInput = () => {
   const [value, setValue] = useState('')
   const [searchData, setSearchData] = useState(null)
   const [aiData, setAiData] = useState(null)
-  const lottieRef = useRef(null)
 
   useEffect(() => {
     fetch('/jsons/search.json')
@@ -39,16 +38,6 @@ export const SearchInput = () => {
       .catch(() => {})
   }, [])
 
-  useEffect(() => {
-    if (lottieRef.current) {
-      const player = lottieRef.current as any
-      if (player.stop && player.play) {
-        player.stop()
-        player.play()
-      }
-    }
-  }, [isAiMode])
-
   const handleToggle = () => {
     triggerHaptic('medium')
     setTimeout(() => {
@@ -58,10 +47,10 @@ export const SearchInput = () => {
   }
 
   const currentPlaceholder = isAiMode ? 'Спросить ИИ...' : 'Найти что-нибудь...'
-  const activeAnimation = isAiMode ? aiData : searchData
+  const activeAnimation = isAiMode ? searchData : aiData
 
   return (
-    <div style={{ width: '100%', display: 'flex', alignItems: 'center', gap: '8px', position: 'relative', height: '48px' }}>
+    <div style={{ width: '100%', maxWidth: '100%', display: 'flex', alignItems: 'center', gap: '8px', position: 'relative', height: '48px', boxSizing: 'border-box' }}>
       <motion.div
         layout
         transition={{ type: 'spring', stiffness: 400, damping: 30 }}
@@ -77,10 +66,11 @@ export const SearchInput = () => {
           paddingLeft: '20px',
           position: 'relative',
           zIndex: 10,
-          overflow: 'hidden'
+          overflow: 'hidden',
+          boxSizing: 'border-box'
         }}
       >
-        <div style={{ position: 'relative', flex: 1, height: '100%', display: 'flex', alignItems: 'center', marginRight: '8px' }}>
+        <div style={{ position: 'relative', flex: 1, height: '100%', display: 'flex', alignItems: 'center', marginRight: '8px', boxSizing: 'border-box' }}>
           <AnimatePresence mode="wait" custom={isAiMode}>
             {value === '' && (
               <motion.span
@@ -119,7 +109,8 @@ export const SearchInput = () => {
               width: '100%',
               fontWeight: 500,
               position: 'relative',
-              zIndex: 10
+              zIndex: 10,
+              boxSizing: 'border-box'
             }}
           />
         </div>
@@ -133,7 +124,8 @@ export const SearchInput = () => {
               paddingRight: '18px',
               borderRadius: '9999px',
               cursor: 'pointer',
-              flexShrink: 0
+              flexShrink: 0,
+              boxSizing: 'border-box'
             }}
           >
             <img 
@@ -161,13 +153,14 @@ export const SearchInput = () => {
           flexShrink: 0,
           zIndex: 20,
           overflow: 'hidden',
-          cursor: 'pointer'
+          cursor: 'pointer',
+          boxSizing: 'border-box'
         }}
         className="search-glass"
       >
         <AnimatePresence mode="wait">
           <motion.div
-            key={isAiMode ? 'ai-icon' : 'search-icon'}
+            key={isAiMode ? 'search-icon' : 'ai-icon'}
             initial={{ scale: 0.4, opacity: 0, rotate: isAiMode ? -45 : 45 }}
             animate={{ scale: 1, opacity: 1, rotate: 0 }}
             exit={{ scale: 0.4, opacity: 0 }}
@@ -176,7 +169,6 @@ export const SearchInput = () => {
           >
             {activeAnimation ? (
               <Lottie
-                lottieRef={lottieRef}
                 animationData={activeAnimation}
                 loop={false}
                 autoplay={true}
@@ -184,7 +176,7 @@ export const SearchInput = () => {
               />
             ) : (
               <img 
-                src={isAiMode ? '/icons/search.png' : '/icons/bulb.png'} 
+                src={isAiMode ? '/icons/search.png' : '/icons/ai.png'} 
                 alt="Toggle" 
                 style={{ width: '20px', height: '20px', objectFit: 'contain' }}
               />
