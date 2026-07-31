@@ -8,7 +8,7 @@ import { triggerHaptic } from '../../lib/tg'
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false })
 
 const textVariants = {
-  initial: (isAi) => ({
+  initial: (isAi: any) => ({
     opacity: 0,
     y: isAi ? 12 : -12
   }),
@@ -16,7 +16,7 @@ const textVariants = {
     opacity: 1,
     y: 0
   },
-  exit: (isAi) => ({
+  exit: (isAi: any) => ({
     opacity: 0,
     y: isAi ? -12 : 12
   })
@@ -86,7 +86,7 @@ export const SearchInput = () => {
                 style={{
                   position: 'absolute',
                   left: 0,
-                  color: 'rgba(255, 255, 255, 0.35)',
+                  color: 'rgba(255, 255, 255, 0.45)',
                   fontWeight: 500,
                   fontSize: '14px',
                   pointerEvents: 'none',
@@ -151,7 +151,7 @@ export const SearchInput = () => {
           borderRadius: '9999px',
           display: 'flex',
           alignItems: 'center',
-          justify-content: 'center',
+          justifyContent: 'center',
           flexShrink: 0,
           zIndex: 20,
           overflow: 'hidden',
