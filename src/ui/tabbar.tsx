@@ -12,8 +12,10 @@ export const TabBar: React.FC<TabBarProps> = ({ activeTab, setActiveTab }) => {
   const user = getUserData()
 
   const handleSelect = (tabKey: string) => {
-    triggerHaptic('light')
-    setActiveTab(tabKey)
+    if (activeTab !== tabKey) {
+      triggerHaptic('light')
+      setActiveTab(tabKey)
+    }
   }
 
   return (
@@ -38,7 +40,7 @@ export const TabBar: React.FC<TabBarProps> = ({ activeTab, setActiveTab }) => {
         className={`tabitem ${activeTab === 'cards' ? 'active' : ''}`}
         onClick={() => handleSelect('cards')}
       >
-        <img src="/icons/cards.png" alt="Карты" className="tabicon" />
+        <span className="cards-hardened-icon" />
         <span className="tablabel">Карты</span>
       </button>
 
