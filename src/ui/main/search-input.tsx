@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Lottie from 'lottie-react'
 import { triggerHaptic } from '../../lib/tg'
@@ -25,7 +25,6 @@ export const SearchInput = () => {
   const [value, setValue] = useState('')
   const [searchData, setSearchData] = useState(null)
   const [aiData, setAiData] = useState(null)
-  const lottieRef = useRef(null)
 
   useEffect(() => {
     fetch('/jsons/search.json')
@@ -38,16 +37,6 @@ export const SearchInput = () => {
       .then((data) => setAiData(data))
       .catch(() => {})
   }, [])
-
-  useEffect(() => {
-    if (lottieRef.current) {
-      const player = lottieRef.current as any
-      if (player.stop && player.play) {
-        player.stop()
-        player.play()
-      }
-    }
-  }, [isAiMode])
 
   const handleToggle = () => {
     triggerHaptic('medium')
@@ -65,7 +54,7 @@ export const SearchInput = () => {
       <motion.div
         layout
         transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-        className="search-glass"
+        className="search-bar-box"
         style={{
           flex: 1,
           height: '100%',
@@ -95,7 +84,7 @@ export const SearchInput = () => {
                 style={{
                   position: 'absolute',
                   left: 0,
-                  color: 'rgba(255, 255, 255, 0.35)',
+                  color: 'rgba(255, 255, 255, 0.4)',
                   fontWeight: 500,
                   fontSize: '14px',
                   pointerEvents: 'none',
@@ -167,7 +156,7 @@ export const SearchInput = () => {
           cursor: 'pointer',
           boxSizing: 'border-box'
         }}
-        className="search-glass"
+        className="search-bar-box"
       >
         <AnimatePresence mode="wait">
           <motion.div
@@ -180,7 +169,6 @@ export const SearchInput = () => {
           >
             {activeAnimation ? (
               <Lottie
-                lottieRef={lottieRef}
                 animationData={activeAnimation}
                 loop={false}
                 autoplay={true}
