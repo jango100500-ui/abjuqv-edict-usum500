@@ -1,15 +1,15 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { TopBar } from '@/ui/topbar'
-import { TabBar } from '@/ui/tabbar'
-import { BannersCarousel } from '@/ui/cards/banners-carousel'
-import { AdminPassword } from '@/ui/admin/password'
-import { AdminDashboard } from '@/ui/admin/dashboard'
-import { AdminBanners } from '@/ui/admin/banners'
-import { initTelegramRules, getUserData, getTg } from '@/lib/tg'
-import { checkIsAdminUser, getAdminState } from '@/storage/admin'
-import { getStoredBanners, Banner } from '@/storage/banners'
+import { TopBar } from '../ui/topbar'
+import { TabBar } from '../ui/tabbar'
+import { BannersCarousel } from '../ui/banners-carousel'
+import { AdminPassword } from '../ui/admin-password'
+import { AdminDashboard } from '../ui/admin-dashboard'
+import { AdminBanners } from '../ui/admin-banners'
+import { initTelegramRules, getUserData, getTg } from '../lib/tg'
+import { checkIsAdminUser, getAdminState } from '../storage/admin'
+import { getStoredBanners, Banner } from '../storage/banners'
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<string>('cards')
