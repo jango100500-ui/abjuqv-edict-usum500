@@ -31,8 +31,8 @@ html, body {
   top: 0;
   left: 0;
   right: 0;
-  height: 55vh;
-  background: radial-gradient(circle at 50% -10%, rgba(255, 90, 0, 0.35) 0%, rgba(0, 0, 0, 0.8) 45%, rgba(0, 0, 0, 1) 70%);
+  height: 38vh;
+  background: linear-gradient(172deg, #000000 45%, rgba(255, 90, 0, 0.6) 88%, #000000 95%);
   pointer-events: none;
   z-index: 1;
 }
