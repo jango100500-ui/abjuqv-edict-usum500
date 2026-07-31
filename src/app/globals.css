@@ -91,23 +91,40 @@ html, body {
   gap: 4px;
   background: transparent;
   border: none;
-  color: #8e95a2;
+  outline: none;
+  color: #ffffff;
   cursor: pointer;
   flex: 1;
-  opacity: 0.6;
-  transition: all 0.2s ease;
+  opacity: 0.45;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .tabitem.active {
   opacity: 1;
-  color: #ffffff;
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 .tabicon {
   width: 26px;
   height: 26px;
   object-fit: contain;
+}
+
+.cards-hardened-icon {
+  width: 26px;
+  height: 26px;
+  background: radial-gradient(circle at 25% 25%, #ffe17d 0%, #ff8000 40%, #c042ff 75%, #2d82fe 100%);
+  -webkit-mask-image: url('/icons/cards.png');
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-image: url('/icons/cards.png');
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  display: inline-block;
+  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .avatarbox {
@@ -120,6 +137,7 @@ html, body {
   align-items: center;
   justify-content: center;
   background-color: #1e2633;
+  transition: border-color 0.25s ease;
 }
 
 .useravatar {
