@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 @import '../rules/locks.css';
 
 html, body {
@@ -5,7 +6,7 @@ html, body {
   height: 100%;
   background-color: #0b0e14;
   color: #ffffff;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   overflow: hidden;
 }
 
@@ -35,7 +36,7 @@ html, body {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 90px;
+  height: 110px;
   background: linear-gradient(0deg, #000000 0%, rgba(11, 14, 20, 0) 100%);
   pointer-events: none;
   z-index: 50;
@@ -62,17 +63,91 @@ html, body {
 }
 
 .mainlogo {
-  height: 24px;
+  height: 32px;
   width: auto;
   object-fit: contain;
+}
+
+.tabbarwrap {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 8px;
+  padding-bottom: max(10px, env(safe-area-inset-bottom));
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.tabitem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  color: #8e95a2;
+  cursor: pointer;
+  flex: 1;
+  opacity: 0.6;
+  transition: all 0.2s ease;
+}
+
+.tabitem.active {
+  opacity: 1;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.tabicon {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.avatarbox {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid #ffffff;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1e2633;
+}
+
+.useravatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatarfallback {
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.tablabel {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  white-space: nowrap;
 }
 
 .testcontent {
   flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 700;
   z-index: 20;
 }
