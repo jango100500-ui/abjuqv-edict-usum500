@@ -1,16 +1,16 @@
 'use client'
 
 import React from 'react'
-import { triggerHaptic, getUserData } from '../lib/tg'
+import { triggerHaptic } from '../lib/tg'
 
 interface TabBarProps {
   activeTab: string
   setActiveTab: (tab: string) => void
+  user: any
+  isLoading: boolean
 }
 
-export const TabBar: React.FC<TabBarProps> = ({ activeTab, setActiveTab }) => {
-  const user = getUserData()
-
+export const TabBar: React.FC<TabBarProps> = ({ activeTab, setActiveTab, user, isLoading }) => {
   const handleSelect = (tabKey: string) => {
     if (activeTab !== tabKey) {
       triggerHaptic('light')
@@ -57,11 +57,13 @@ export const TabBar: React.FC<TabBarProps> = ({ activeTab, setActiveTab }) => {
         onClick={() => handleSelect('profile')}
       >
         <div className="avatarbox">
-          {user.photo_url ? (
+          {isLoading ? (
+            <div className="skel-circle" />
+          ) : user?.photo_url ? (
             <img src={user.photo_url} alt="Аватар" className="useravatar" />
           ) : (
             <span className="avatarfallback">
-              {user.first_name ? user.first_name.charAt(0).toUpperCase() : 'U'}
+              {user?.first_name ? user.first_name.charAt(0).toUpperCase() : 'U'}
             </span>
           )}
         </div>
