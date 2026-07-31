@@ -40,8 +40,8 @@ export const TabBar: React.FC<TabBarProps> = ({ activeTab, setActiveTab }) => {
         className={`tabitem ${activeTab === 'cards' ? 'active' : ''}`}
         onClick={() => handleSelect('cards')}
       >
-        <img src="/icons/cards.png" alt="Карты" className="tabicon" />
-        <span className="tablabel">Карты</span>
+        <img src="/icons/cards.png" alt="Главная" className="tabicon" />
+        <span className="tablabel">Главная</span>
       </button>
 
       <button 
