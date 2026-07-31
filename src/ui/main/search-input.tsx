@@ -54,7 +54,7 @@ export const SearchInput = () => {
       <motion.div
         layout
         transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-        className="search-bar-box"
+        className="search-glass"
         style={{
           flex: 1,
           height: '100%',
@@ -84,7 +84,7 @@ export const SearchInput = () => {
                 style={{
                   position: 'absolute',
                   left: 0,
-                  color: 'rgba(255, 255, 255, 0.4)',
+                  color: 'rgba(255, 255, 255, 0.35)',
                   fontWeight: 500,
                   fontSize: '14px',
                   pointerEvents: 'none',
@@ -149,14 +149,14 @@ export const SearchInput = () => {
           borderRadius: '9999px',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
+          justify-content: 'center',
           flexShrink: 0,
           zIndex: 20,
           overflow: 'hidden',
           cursor: 'pointer',
           boxSizing: 'border-box'
         }}
-        className="search-bar-box"
+        className="search-glass"
       >
         <AnimatePresence mode="wait">
           <motion.div
