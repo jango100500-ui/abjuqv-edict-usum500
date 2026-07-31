@@ -1,171 +1,44 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-@import '../rules/locks.css';
+'use client'
 
-html, body {
-  width: 100%;
-  height: 100%;
-  background-color: #0b0e14;
-  color: #ffffff;
-  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  overflow: hidden;
+import React, { useRef } from 'react'
+
+interface TopBarProps {
+  onAdminHold?: () => void
 }
 
-.mainlayout {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  background-color: #0b0e14;
-}
+export const TopBar: React.FC<TopBarProps> = ({ onAdminHold }) => {
+  const timerRef = useRef<any>(null)
 
-.vignette-top {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 90px;
-  background: linear-gradient(180deg, #000000 0%, rgba(11, 14, 20, 0) 100%);
-  pointer-events: none;
-  z-index: 50;
-}
+  const handleStart = () => {
+    if (!onAdminHold) return
+    timerRef.current = setTimeout(() => {
+      onAdminHold()
+    }, 1500)
+  }
 
-.vignette-bottom {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 110px;
-  background: linear-gradient(0deg, #000000 0%, rgba(11, 14, 20, 0) 100%);
-  pointer-events: none;
-  z-index: 50;
-}
+  const handleEnd = () => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current)
+      timerRef.current = null
+    }
+  }
 
-.topheader {
-  position: fixed;
-  top: env(safe-area-inset-top, 0px);
-  left: 0;
-  right: 0;
-  height: 44px;
-  z-index: 100;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  pointer-events: none;
-}
-
-.logowrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-
-.mainlogo {
-  height: 32px;
-  width: auto;
-  object-fit: contain;
-}
-
-.tabbarwrap {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding-top: 8px;
-  padding-bottom: max(10px, env(safe-area-inset-bottom));
-  padding-left: 12px;
-  padding-right: 12px;
-}
-
-.tabitem {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: #ffffff;
-  cursor: pointer;
-  flex: 1;
-  opacity: 0.45;
-  -webkit-tap-highlight-color: transparent;
-  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.tabitem.active {
-  opacity: 1;
-  transform: translateY(-1px);
-}
-
-.tabicon {
-  width: 26px;
-  height: 26px;
-  object-fit: contain;
-}
-
-.cards-hardened-icon {
-  width: 26px;
-  height: 26px;
-  background: radial-gradient(circle at 25% 25%, #ffe17d 0%, #ff8000 40%, #c042ff 75%, #2d82fe 100%);
-  -webkit-mask-image: url('/icons/cards.png');
-  -webkit-mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-image: url('/icons/cards.png');
-  mask-size: contain;
-  mask-repeat: no-repeat;
-  mask-position: center;
-  display: inline-block;
-  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.avatarbox {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  border: 1.5px solid #ffffff;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #1e2633;
-  transition: border-color 0.25s ease;
-}
-
-.useravatar {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.avatarfallback {
-  font-size: 11px;
-  font-weight: 700;
-  color: #ffffff;
-}
-
-.tablabel {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: -0.2px;
-  white-space: nowrap;
-}
-
-.testcontent {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  font-weight: 700;
-  z-index: 20;
+  return (
+    <header className="topheader">
+      <div 
+        className="logowrap"
+        onTouchStart={handleStart}
+        onTouchEnd={handleEnd}
+        onMouseDown={handleStart}
+        onMouseUp={handleEnd}
+        onMouseLeave={handleEnd}
+      >
+        <img 
+          src="/logos/cardslogo.png" 
+          alt="sw cardsbot logo" 
+          className="mainlogo"
+        />
+      </div>
+    </header>
+  )
 }
