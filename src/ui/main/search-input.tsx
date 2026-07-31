@@ -8,7 +8,7 @@ import { triggerHaptic } from '../../lib/tg'
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false })
 
 const textVariants = {
-  initial: (isAi: any) => ({
+  initial: (isAi) => ({
     opacity: 0,
     y: isAi ? 12 : -12
   }),
@@ -16,7 +16,7 @@ const textVariants = {
     opacity: 1,
     y: 0
   },
-  exit: (isAi: any) => ({
+  exit: (isAi) => ({
     opacity: 0,
     y: isAi ? -12 : 12
   })
@@ -52,7 +52,7 @@ export const SearchInput = () => {
   const activeAnimation = isAiMode ? searchData : aiData
 
   return (
-    <div style={{ width: '100%', maxWidth: '100%', display: 'flex', alignItems: 'center', gap: '12px', position: 'relative', height: '48px', boxSizing: 'border-box' }}>
+    <div style={{ width: '100%', maxWidth: '100%', display: 'flex', alignItems: 'center', position: 'relative', height: '48px', boxSizing: 'border-box' }}>
       <motion.div
         layout
         transition={{ type: 'spring', stiffness: 400, damping: 30 }}
@@ -60,14 +60,14 @@ export const SearchInput = () => {
         style={{
           flex: 1,
           height: '100%',
-          borderRadius: '12px',
+          borderRadius: '20px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           paddingRight: '4px',
-          paddingLeft: '20px',
+          paddingLeft: '18px',
           position: 'relative',
-          zIndex: 10,
+          zIndex: 20,
           overflow: 'hidden',
           boxSizing: 'border-box'
         }}
@@ -124,7 +124,7 @@ export const SearchInput = () => {
               height: '38px',
               paddingLeft: '18px',
               paddingRight: '18px',
-              borderRadius: '10px',
+              borderRadius: '14px',
               cursor: 'pointer',
               flexShrink: 0,
               boxSizing: 'border-box'
@@ -142,50 +142,44 @@ export const SearchInput = () => {
       <motion.button
         layout
         onClick={handleToggle}
-        animate={{ rotate: isAiMode ? 135 : 45 }}
-        whileTap={{ scale: 0.9 }}
+        whileTap={{ scale: 0.95 }}
         transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+        className="search-glass"
         style={{
-          order: isAiMode ? -1 : 1,
-          height: '42px',
-          width: '42px',
-          borderRadius: '12px',
+          height: '48px',
+          borderRadius: '20px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          flexShrink: 0,
-          zIndex: 20,
-          overflow: 'hidden',
+          gap: '6px',
+          paddingLeft: '16px',
+          paddingRight: '16px',
+          marginLeft: '-10px',
+          zIndex: 10,
           cursor: 'pointer',
-          boxSizing: 'border-box'
+          boxSizing: 'border-box',
+          flexShrink: 0
         }}
-        className="search-glass"
       >
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={isAiMode ? 'search-icon' : 'ai-icon'}
-            initial={{ opacity: 0 }}
-            animate={{ rotate: isAiMode ? -135 : -45, opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            style={{ width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-          >
-            {activeAnimation ? (
-              <Lottie
-                animationData={activeAnimation}
-                loop={false}
-                autoplay={true}
-                style={{ width: '100%', height: '100%' }}
-              />
-            ) : (
-              <img 
-                src={isAiMode ? '/icons/search.png' : '/icons/ai.png'} 
-                alt="Toggle" 
-                style={{ width: '20px', height: '20px', objectFit: 'contain' }}
-              />
-            )}
-          </motion.div>
-        </AnimatePresence>
+        <div style={{ width: '22px', height: '22px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          {activeAnimation ? (
+            <Lottie
+              animationData={activeAnimation}
+              loop={false}
+              autoplay={true}
+              style={{ width: '100%', height: '100%' }}
+            />
+          ) : (
+            <img 
+              src={isAiMode ? '/icons/search.png' : '/icons/ai.png'} 
+              alt="Toggle" 
+              style={{ width: '18px', height: '18px', objectFit: 'contain' }}
+            />
+          )}
+        </div>
+        <span style={{ color: '#ffffff', fontSize: '13px', fontWeight: 700, whiteSpace: 'nowrap' }}>
+          {isAiMode ? 'Поиск' : 'ИИ'}
+        </span>
       </motion.button>
     </div>
   )
