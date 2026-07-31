@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useState, useRef } from 'react'
-import { verifyPassword } from '@/storage/admin'
-import { triggerHaptic } from '@/lib/tg'
+import { verifyPassword } from '../storage/admin'
+import { triggerHaptic } from '../lib/tg'
 
 interface AdminPasswordProps {
   onSuccess: () => void
