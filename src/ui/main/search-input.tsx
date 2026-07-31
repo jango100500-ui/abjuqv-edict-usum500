@@ -1,7 +1,8 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Lottie, { LottieRefCurrentProps } from 'lottie-react'
 import { triggerHaptic } from '../../lib/tg'
 
 const textVariants = {
@@ -22,6 +23,28 @@ const textVariants = {
 export const SearchInput: React.FC = () => {
   const [isAiMode, setIsAiMode] = useState(false)
   const [value, setValue] = useState('')
+  const [searchData, setSearchData] = useState<any>(null)
+  const [aiData, setAiData] = useState<any>(null)
+  const lottieRef = useRef<LottieRefCurrentProps>(null)
+
+  useEffect(() => {
+    fetch('/jsons/search.json')
+      .then((res) => res.json())
+      .then((data) => setSearchData(data))
+      .catch(() => {})
+
+    fetch('/jsons/ai.json')
+      .then((res) => res.json())
+      .then((data) => setAiData(data))
+      .catch(() => {})
+  }, [])
+
+  useEffect(() => {
+    if (lottieRef.current) {
+      lottieRef.current.stop()
+      lottieRef.current.play()
+    }
+  }, [isAiMode])
 
   const handleToggle = () => {
     triggerHaptic('medium')
@@ -32,6 +55,7 @@ export const SearchInput: React.FC = () => {
   }
 
   const currentPlaceholder = isAiMode ? 'Спросить ИИ...' : 'Найти что-нибудь...'
+  const activeAnimation = isAiMode ? aiData : searchData
 
   return (
     <div style={{ width: '100%', display: 'flex', alignItems: 'center', gap: '8px', position: 'relative', height: '48px' }}>
@@ -145,13 +169,23 @@ export const SearchInput: React.FC = () => {
             animate={{ scale: 1, opacity: 1, rotate: 0 }}
             exit={{ scale: 0.4, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            style={{ width: '22px', height: '22px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            style={{ width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           >
-            <img 
-              src={isAiMode ? '/icons/search.png' : '/icons/bulb.png'} 
-              alt="Mode toggle" 
-              style={{ width: '20px', height: '20px', objectFit: 'contain' }}
-            />
+            {activeAnimation ? (
+              <Lottie
+                lottieRef={lottieRef}
+                animationData={activeAnimation}
+                loop={false}
+                autoplay={true}
+                style={{ width: '100%', height: '100%' }}
+              />
+            ) : (
+              <img 
+                src={isAiMode ? '/icons/search.png' : '/icons/bulb.png'} 
+                alt="Toggle" 
+                style={{ width: '20px', height: '20px', objectFit: 'contain' }}
+              />
+            )}
           </motion.div>
         </AnimatePresence>
       </motion.button>
