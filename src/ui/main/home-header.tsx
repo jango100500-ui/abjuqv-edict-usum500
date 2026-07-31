@@ -9,6 +9,9 @@ interface HomeHeaderProps {
 }
 
 export const HomeHeader: React.FC<HomeHeaderProps> = ({ user, isLoading }) => {
+  const firstName = user?.first_name || ''
+  const isLongName = firstName.length > 7
+
   return (
     <div style={{
       width: '100%',
@@ -23,21 +26,33 @@ export const HomeHeader: React.FC<HomeHeaderProps> = ({ user, isLoading }) => {
       gap: '24px',
       boxSizing: 'border-box'
     }}>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '8px', width: '100%' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '4px', width: '100%' }}>
         {isLoading ? (
-          <div className="skel-block" style={{ width: '60%', height: '34px', borderRadius: '12px' }} />
+          <>
+            <div className="skel-block" style={{ width: '55%', height: '32px' }} />
+            <div className="skel-block" style={{ width: '40%', height: '28px', marginTop: '6px' }} />
+          </>
         ) : (
-          <h1 className="clamp-2" style={{ fontSize: '28px', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.4px', margin: 0, width: '100%' }}>
-            Привет, {user?.first_name || 'Гость'}!
-          </h1>
-        )}
+          <>
+            {isLongName ? (
+              <>
+                <h1 style={{ fontSize: '28px', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.4px', margin: 0 }}>
+                  Привет,
+                </h1>
+                <h1 className="clamp-2" style={{ fontSize: '28px', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.4px', margin: 0, width: '100%' }}>
+                  {firstName}!
+                </h1>
+              </>
+            ) : (
+              <h1 className="clamp-2" style={{ fontSize: '28px', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.4px', margin: 0, width: '100%' }}>
+                Привет, {firstName || 'Гость'}!
+              </h1>
+            )}
 
-        {isLoading ? (
-          <div className="skel-block" style={{ width: '40%', height: '28px', borderRadius: '8px', marginTop: '4px' }} />
-        ) : (
-          <h2 style={{ fontSize: '28px', fontWeight: 800, color: 'rgba(255, 255, 255, 0.65)', letterSpacing: '-0.4px', margin: 0 }}>
-            Что хочешь найти?
-          </h2>
+            <h2 style={{ fontSize: '28px', fontWeight: 800, color: 'rgba(255, 255, 255, 0.65)', letterSpacing: '-0.4px', margin: 0 }}>
+              Что хочешь найти?
+            </h2>
+          </>
         )}
       </div>
 
