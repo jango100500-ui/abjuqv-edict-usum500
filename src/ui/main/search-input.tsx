@@ -52,7 +52,7 @@ export const SearchInput = () => {
   const activeAnimation = isAiMode ? searchData : aiData
 
   return (
-    <div style={{ width: '100%', maxWidth: '100%', display: 'flex', alignItems: 'center', gap: '8px', position: 'relative', height: '48px', boxSizing: 'border-box' }}>
+    <div style={{ width: '100%', maxWidth: '100%', display: 'flex', alignItems: 'center', gap: '12px', position: 'relative', height: '48px', boxSizing: 'border-box' }}>
       <motion.div
         layout
         transition={{ type: 'spring', stiffness: 400, damping: 30 }}
@@ -60,7 +60,7 @@ export const SearchInput = () => {
         style={{
           flex: 1,
           height: '100%',
-          borderRadius: '9999px',
+          borderRadius: '16px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -124,7 +124,7 @@ export const SearchInput = () => {
               height: '38px',
               paddingLeft: '18px',
               paddingRight: '18px',
-              borderRadius: '9999px',
+              borderRadius: '12px',
               cursor: 'pointer',
               flexShrink: 0,
               boxSizing: 'border-box'
@@ -142,13 +142,14 @@ export const SearchInput = () => {
       <motion.button
         layout
         onClick={handleToggle}
+        animate={{ rotate: isAiMode ? 135 : 45 }}
         whileTap={{ scale: 0.9 }}
         transition={{ type: 'spring', stiffness: 400, damping: 30 }}
         style={{
           order: isAiMode ? -1 : 1,
-          height: '48px',
-          width: '48px',
-          borderRadius: '9999px',
+          height: '42px',
+          width: '42px',
+          borderRadius: '14px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -163,9 +164,9 @@ export const SearchInput = () => {
         <AnimatePresence mode="wait">
           <motion.div
             key={isAiMode ? 'search-icon' : 'ai-icon'}
-            initial={{ scale: 0.4, opacity: 0, rotate: isAiMode ? -45 : 45 }}
-            animate={{ scale: 1, opacity: 1, rotate: 0 }}
-            exit={{ scale: 0.4, opacity: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ rotate: isAiMode ? -135 : -45, opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             style={{ width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           >
