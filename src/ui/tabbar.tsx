@@ -6,9 +6,10 @@ import { triggerHaptic, getUserData } from '@/lib/tg'
 interface TabBarProps {
   activeTab: string
   setActiveTab: (tab: string) => void
+  hidden?: boolean
 }
 
-export const TabBar: React.FC<TabBarProps> = ({ activeTab, setActiveTab }) => {
+export const TabBar: React.FC<TabBarProps> = ({ activeTab, setActiveTab, hidden = false }) => {
   const user = getUserData()
 
   const handleSelect = (tabKey: string) => {
@@ -19,7 +20,7 @@ export const TabBar: React.FC<TabBarProps> = ({ activeTab, setActiveTab }) => {
   }
 
   return (
-    <nav className="tabbarwrap">
+    <nav className={`tabbarwrap ${hidden ? 'hidden' : ''}`}>
       <button 
         className={`tabitem ${activeTab === 'market' ? 'active' : ''}`}
         onClick={() => handleSelect('market')}
