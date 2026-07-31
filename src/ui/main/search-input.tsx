@@ -2,8 +2,10 @@
 
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import Lottie from 'lottie-react'
+import dynamic from 'next/dynamic'
 import { triggerHaptic } from '../../lib/tg'
+
+const Lottie = dynamic(() => import('lottie-react'), { ssr: false })
 
 const textVariants = {
   initial: (isAi: any) => ({
