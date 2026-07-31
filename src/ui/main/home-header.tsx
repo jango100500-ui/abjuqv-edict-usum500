@@ -26,7 +26,16 @@ export const HomeHeader: React.FC<HomeHeaderProps> = ({ user, isLoading }) => {
       gap: '24px',
       boxSizing: 'border-box'
     }}>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '4px', width: '100%' }}>
+      <div style={{ 
+        display: 'flex', 
+        flexDirection: 'column', 
+        alignItems: 'center', 
+        justifyContent: 'flex-end',
+        textAlign: 'center', 
+        gap: '4px', 
+        width: '100%',
+        minHeight: '110px'
+      }}>
         {isLoading ? (
           <>
             <div className="skel-block" style={{ width: '55%', height: '32px' }} />
