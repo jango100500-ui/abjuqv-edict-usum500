@@ -10,21 +10,24 @@ export const HomeHeader = () => {
   return (
     <div style={{
       width: '100%',
+      maxWidth: '100%',
       paddingLeft: '16px',
       paddingRight: '16px',
-      paddingTop: '16px',
+      paddingTop: '32px',
       paddingBottom: '24px',
       display: 'flex',
       flexDirection: 'column',
-      gap: '14px'
+      alignItems: 'center',
+      gap: '24px',
+      boxSizing: 'border-box'
     }}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-        <h1 style={{ fontSize: '22px', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.4px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '4px', width: '100%' }}>
+        <h1 style={{ fontSize: '28px', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.4px', margin: 0 }}>
           Привет, {user.first_name || 'Игрок'}!
         </h1>
-        <p style={{ fontSize: '14px', fontWeight: 500, color: 'rgba(255, 255, 255, 0.65)' }}>
+        <h2 style={{ fontSize: '28px', fontWeight: 800, color: 'rgba(255, 255, 255, 0.65)', letterSpacing: '-0.4px', margin: 0 }}>
           Что хочешь найти?
-        </p>
+        </h2>
       </div>
 
       <SearchInput />
