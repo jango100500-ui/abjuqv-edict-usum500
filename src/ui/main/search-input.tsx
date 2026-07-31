@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Lottie from 'lottie-react'
 import { triggerHaptic } from '../../lib/tg'
@@ -25,6 +25,7 @@ export const SearchInput = () => {
   const [value, setValue] = useState('')
   const [searchData, setSearchData] = useState(null)
   const [aiData, setAiData] = useState(null)
+  const lottieRef = useRef(null)
 
   useEffect(() => {
     fetch('/jsons/search.json')
@@ -38,6 +39,16 @@ export const SearchInput = () => {
       .catch(() => {})
   }, [])
 
+  useEffect(() => {
+    if (lottieRef.current) {
+      const player = lottieRef.current as any
+      if (player.stop && player.play) {
+        player.stop()
+        player.play()
+      }
+    }
+  }, [isAiMode])
+
   const handleToggle = () => {
     triggerHaptic('medium')
     setTimeout(() => {
@@ -46,7 +57,7 @@ export const SearchInput = () => {
     setIsAiMode(!isAiMode)
   }
 
-  const currentPlaceholder = isAiMode ? 'Спросить ИИ...' : 'Найти что-нибудь...'
+  const currentPlaceholder = isAiMode ? 'Спроси у ИИ' : 'Найди что-нибудь...'
   const activeAnimation = isAiMode ? searchData : aiData
 
   return (
@@ -169,6 +180,7 @@ export const SearchInput = () => {
           >
             {activeAnimation ? (
               <Lottie
+                lottieRef={lottieRef}
                 animationData={activeAnimation}
                 loop={false}
                 autoplay={true}
