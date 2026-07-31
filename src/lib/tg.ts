@@ -38,3 +38,23 @@ export const initTelegramRules = () => {
     } catch (e) {}
   }
 }
+
+export const triggerHaptic = (style: 'light' | 'medium' | 'heavy' = 'light') => {
+  const tg = getTg()
+  if (tg && tg.HapticFeedback) {
+    tg.HapticFeedback.impactOccurred(style)
+  }
+}
+
+export const getUserData = () => {
+  const tg = getTg()
+  if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
+    return tg.initDataUnsafe.user
+  }
+  return {
+    id: 7777777,
+    first_name: 'Игрок',
+    username: 'jedi_player',
+    photo_url: ''
+  }
+}
