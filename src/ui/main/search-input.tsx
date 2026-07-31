@@ -6,26 +6,26 @@ import Lottie from 'lottie-react'
 import { triggerHaptic } from '../../lib/tg'
 
 const textVariants = {
-  initial: (isAi: boolean) => ({
+  initial: (isAi: any) => ({
     opacity: 0,
-    y: isAi ? 12 : -12,
+    y: isAi ? 12 : -12
   }),
   animate: {
     opacity: 1,
-    y: 0,
+    y: 0
   },
-  exit: (isAi: boolean) => ({
+  exit: (isAi: any) => ({
     opacity: 0,
-    y: isAi ? -12 : 12,
-  }),
+    y: isAi ? -12 : 12
+  })
 }
 
-export const SearchInput: React.FC = () => {
+export const SearchInput = () => {
   const [isAiMode, setIsAiMode] = useState(false)
   const [value, setValue] = useState('')
-  const [searchData, setSearchData] = useState<any>(null)
-  const [aiData, setAiData] = useState<any>(null)
-  const lottieRef = useRef<any>(null)
+  const [searchData, setSearchData] = useState(null)
+  const [aiData, setAiData] = useState(null)
+  const lottieRef = useRef(null)
 
   useEffect(() => {
     fetch('/jsons/search.json')
@@ -41,8 +41,11 @@ export const SearchInput: React.FC = () => {
 
   useEffect(() => {
     if (lottieRef.current) {
-      lottieRef.current.stop()
-      lottieRef.current.play()
+      const player = lottieRef.current as any
+      if (player.stop && player.play) {
+        player.stop()
+        player.play()
+      }
     }
   }, [isAiMode])
 
