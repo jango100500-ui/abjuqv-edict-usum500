@@ -32,7 +32,9 @@ html, body {
   left: 0;
   right: 0;
   height: 38vh;
-  background: linear-gradient(172deg, #000000 45%, rgba(255, 90, 0, 0.6) 88%, #000000 95%);
+  background: 
+    radial-gradient(130% 90% at 85% 10%, rgba(255, 95, 0, 0.55) 0%, rgba(255, 110, 0, 0.22) 45%, rgba(0, 0, 0, 0) 80%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(255, 90, 0, 0.25) 65%, rgba(0, 0, 0, 1) 95%);
   pointer-events: none;
   z-index: 1;
 }
@@ -172,9 +174,9 @@ html, body {
 }
 
 .search-glass {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: none;
 }
 
