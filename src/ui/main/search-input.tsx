@@ -8,7 +8,7 @@ import { triggerHaptic } from '../../lib/tg'
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false })
 
 const textVariants = {
-  initial: (isAi) => ({
+  initial: (isAi: boolean) => ({
     opacity: 0,
     y: isAi ? 12 : -12
   }),
@@ -16,9 +16,9 @@ const textVariants = {
     opacity: 1,
     y: 0
   },
-  exit: (isAi) => ({
+  exit: (isAi: boolean) => ({
     opacity: 0,
-    y: isAi ? -12 : 12
+    y: isAi ? 12 : -12
   })
 }
 
