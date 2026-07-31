@@ -1,9 +1,14 @@
 'use client'
 
+import { TopBar } from '@/ui/topbar'
+
 export default function Home() {
   return (
-    <div className="testbox">
-      test
-    </div>
+    <>
+      <TopBar />
+      <main className="testcontent">
+        test
+      </main>
+    </>
   )
 }
