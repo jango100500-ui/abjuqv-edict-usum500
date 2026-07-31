@@ -1,0 +1,13 @@
+* {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+  touch-action: manipulation;
+}
+
+img, a {
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
+}
