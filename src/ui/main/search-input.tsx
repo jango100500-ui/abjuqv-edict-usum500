@@ -1,0 +1,160 @@
+'use client'
+
+import React, { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { triggerHaptic } from '../../lib/tg'
+
+const textVariants = {
+  initial: (isAi: boolean) => ({
+    opacity: 0,
+    y: isAi ? 12 : -12,
+  }),
+  animate: {
+    opacity: 1,
+    y: 0,
+  },
+  exit: (isAi: boolean) => ({
+    opacity: 0,
+    y: isAi ? -12 : 12,
+  }),
+}
+
+export const SearchInput: React.FC = () => {
+  const [isAiMode, setIsAiMode] = useState(false)
+  const [value, setValue] = useState('')
+
+  const handleToggle = () => {
+    triggerHaptic('medium')
+    setTimeout(() => {
+      triggerHaptic('medium')
+    }, 100)
+    setIsAiMode(!isAiMode)
+  }
+
+  const currentPlaceholder = isAiMode ? 'Спросить ИИ...' : 'Найти что-нибудь...'
+
+  return (
+    <div style={{ width: '100%', display: 'flex', alignItems: 'center', gap: '8px', position: 'relative', height: '48px' }}>
+      <motion.div
+        layout
+        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+        className="search-glass"
+        style={{
+          flex: 1,
+          height: '100%',
+          borderRadius: '9999px',
+          display: 'flex',
+          alignItems: 'center',
+          justify-content: 'space-between',
+          paddingRight: '4px',
+          paddingLeft: '20px',
+          position: 'relative',
+          zIndex: 10,
+          overflow: 'hidden'
+        }}
+      >
+        <div style={{ position: 'relative', flex: 1, height: '100%', display: 'flex', alignItems: 'center', marginRight: '8px' }}>
+          <AnimatePresence mode="wait" custom={isAiMode}>
+            {value === '' && (
+              <motion.span
+                key={currentPlaceholder}
+                custom={isAiMode}
+                variants={textVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                transition={{ duration: 0.2, ease: 'backOut' }}
+                style={{
+                  position: 'absolute',
+                  left: 0,
+                  color: 'rgba(255, 255, 255, 0.35)',
+                  fontWeight: 500,
+                  fontSize: '14px',
+                  pointerEvents: 'none',
+                  whiteSpace: 'nowrap'
+                }}
+              >
+                {currentPlaceholder}
+              </motion.span>
+            )}
+          </AnimatePresence>
+
+          <input
+            type="text"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            style={{
+              backgroundColor: 'transparent',
+              border: 'none',
+              outline: 'none',
+              color: '#ffffff',
+              fontSize: '14px',
+              width: '100%',
+              fontWeight: 500,
+              position: 'relative',
+              zIndex: 10
+            }}
+          />
+        </div>
+
+        {isAiMode && (
+          <button 
+            className="btn-send-white"
+            style={{
+              height: '38px',
+              paddingLeft: '18px',
+              paddingRight: '18px',
+              borderRadius: '9999px',
+              cursor: 'pointer',
+              flexShrink: 0
+            }}
+          >
+            <img 
+              src="/icons/send.png" 
+              alt="Send" 
+              style={{ width: '14px', height: '14px', objectFit: 'contain' }} 
+            />
+          </button>
+        )}
+      </motion.div>
+
+      <motion.button
+        layout
+        onClick={handleToggle}
+        whileTap={{ scale: 0.9 }}
+        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+        style={{
+          order: isAiMode ? -1 : 1,
+          height: '48px',
+          width: '48px',
+          borderRadius: '9999px',
+          display: 'flex',
+          alignItems: 'center',
+          justify-content: 'center',
+          flexShrink: 0,
+          zIndex: 20,
+          overflow: 'hidden',
+          cursor: 'pointer'
+        }}
+        className="search-glass"
+      >
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={isAiMode ? 'ai-icon' : 'search-icon'}
+            initial={{ scale: 0.4, opacity: 0, rotate: isAiMode ? -45 : 45 }}
+            animate={{ scale: 1, opacity: 1, rotate: 0 }}
+            exit={{ scale: 0.4, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            style={{ width: '22px', height: '22px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          >
+            <img 
+              src={isAiMode ? '/icons/search.png' : '/icons/bulb.png'} 
+              alt="Mode toggle" 
+              style={{ width: '20px', height: '20px', objectFit: 'contain' }}
+            />
+          </motion.div>
+        </AnimatePresence>
+      </motion.button>
+    </div>
+  )
+}
