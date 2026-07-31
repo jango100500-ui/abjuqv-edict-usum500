@@ -4,7 +4,7 @@ import React from 'react'
 import { getUserData } from '../../lib/tg'
 import { SearchInput } from './search-input'
 
-export const HomeHeader: React.FC = () => {
+export const HomeHeader = () => {
   const user = getUserData()
 
   return (
