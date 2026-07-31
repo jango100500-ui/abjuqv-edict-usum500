@@ -1,15 +1,14 @@
 'use client'
 
 import React from 'react'
-import { triggerHaptic, getUserData } from '@/lib/tg'
+import { triggerHaptic, getUserData } from '../lib/tg'
 
 interface TabBarProps {
   activeTab: string
   setActiveTab: (tab: string) => void
-  hidden?: boolean
 }
 
-export const TabBar: React.FC<TabBarProps> = ({ activeTab, setActiveTab, hidden = false }) => {
+export const TabBar: React.FC<TabBarProps> = ({ activeTab, setActiveTab }) => {
   const user = getUserData()
 
   const handleSelect = (tabKey: string) => {
@@ -20,7 +19,7 @@ export const TabBar: React.FC<TabBarProps> = ({ activeTab, setActiveTab, hidden 
   }
 
   return (
-    <nav className={`tabbarwrap ${hidden ? 'hidden' : ''}`}>
+    <nav className="tabbarwrap">
       <button 
         className={`tabitem ${activeTab === 'market' ? 'active' : ''}`}
         onClick={() => handleSelect('market')}
@@ -41,7 +40,7 @@ export const TabBar: React.FC<TabBarProps> = ({ activeTab, setActiveTab, hidden 
         className={`tabitem ${activeTab === 'cards' ? 'active' : ''}`}
         onClick={() => handleSelect('cards')}
       >
-        <span className="cards-hardened-icon" />
+        <img src="/icons/cards.png" alt="Карты" className="tabicon" />
         <span className="tablabel">Карты</span>
       </button>
 
