@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import Lottie, { LottieRefCurrentProps } from 'lottie-react'
+import Lottie from 'lottie-react'
 import { triggerHaptic } from '../../lib/tg'
 
 const textVariants = {
@@ -25,7 +25,7 @@ export const SearchInput: React.FC = () => {
   const [value, setValue] = useState('')
   const [searchData, setSearchData] = useState<any>(null)
   const [aiData, setAiData] = useState<any>(null)
-  const lottieRef = useRef<LottieRefCurrentProps>(null)
+  const lottieRef = useRef<any>(null)
 
   useEffect(() => {
     fetch('/jsons/search.json')
