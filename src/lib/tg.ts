@@ -46,15 +46,10 @@ export const triggerHaptic = (style: 'light' | 'medium' | 'heavy' = 'light') => 
   }
 }
 
-export const getUserData = () => {
+export const fetchTgUser = () => {
   const tg = getTg()
   if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
     return tg.initDataUnsafe.user
   }
-  return {
-    id: 7777777,
-    first_name: 'Игрок',
-    username: 'jedi_player',
-    photo_url: ''
-  }
+  return null
 }
