@@ -60,7 +60,7 @@ export const SearchInput = () => {
         style={{
           flex: 1,
           height: '100%',
-          borderRadius: '16px',
+          borderRadius: '12px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -124,7 +124,7 @@ export const SearchInput = () => {
               height: '38px',
               paddingLeft: '18px',
               paddingRight: '18px',
-              borderRadius: '12px',
+              borderRadius: '10px',
               cursor: 'pointer',
               flexShrink: 0,
               boxSizing: 'border-box'
@@ -149,7 +149,7 @@ export const SearchInput = () => {
           order: isAiMode ? -1 : 1,
           height: '42px',
           width: '42px',
-          borderRadius: '14px',
+          borderRadius: '12px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
