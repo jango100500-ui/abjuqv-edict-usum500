@@ -31,8 +31,8 @@ html, body {
   top: 0;
   left: 0;
   right: 0;
-  height: 45vh;
-  background: radial-gradient(100% 100% at 50% 0%, rgba(255, 110, 0, 0.25) 0%, rgba(255, 140, 0, 0.08) 50%, rgba(11, 14, 20, 0) 100%);
+  height: 35vh;
+  background: linear-gradient(180deg, rgba(255, 110, 0, 0.45) 0%, rgba(255, 135, 0, 0.15) 12vh, rgba(11, 14, 20, 0) 28.5vh);
   pointer-events: none;
   z-index: 1;
 }
@@ -185,4 +185,32 @@ html, body {
   justify-content: center;
   box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
   border: none;
+}
+
+.clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+.skel-block {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  animation: skel-pulse 1.5s infinite ease-in-out;
+}
+
+.skel-circle {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  animation: skel-pulse 1.5s infinite ease-in-out;
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes skel-pulse {
+  0% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+  100% { opacity: 0.4; }
 }
