@@ -13,7 +13,7 @@ export const viewport: Viewport = {
   maximumScale: 1,
   userScalable: false,
   viewportFit: 'cover',
-  themeColor: '#0b0e14'
+  themeColor: '#000000'
 }
 
 export default function RootLayout({
@@ -30,7 +30,11 @@ export default function RootLayout({
         />
       </head>
       <body>
-        {children}
+        <div className="mainlayout">
+          <div className="vignette-top" />
+          <div className="vignette-bottom" />
+          {children}
+        </div>
       </body>
     </html>
   )
