@@ -1,12 +1,13 @@
 import './globals.css'
 import Script from 'next/script'
+import { Viewport, Metadata } from 'next'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'sw cardsbot',
   description: 'Telegram Mini App'
 }
 
-export const viewport = {
+export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
@@ -15,7 +16,11 @@ export const viewport = {
   themeColor: '#0b0e14'
 }
 
-export default function RootLayout({ children }) {
+export default function RootLayout({
+  children
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="ru">
       <head>
